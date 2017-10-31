@@ -18,7 +18,6 @@ public void draw()
   	}
   	bob.move();
   	bob.show();
-  	System.out.println(bob.getX() + ", " + bob.getY());
 }
 public void keyPressed()
 {
