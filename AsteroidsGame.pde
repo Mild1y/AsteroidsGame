@@ -1,4 +1,5 @@
 Spaceship bob = new Spaceship();
+Asteroid[] astField = new Asteroid[250];
 Star[] nightSky = new Star[200];
 public void setup() 
 {
@@ -8,6 +9,13 @@ public void setup()
   	{
   		nightSky[i] = new Star();
   	}
+  	for (int a = 0; a < astField.length; a++)
+  	{
+  		astField[a] = new Asteroid();
+  		astField[a].setDirectionX(Math.random() * 5 - 2);
+  		astField[a].setDirectionY(Math.random() * 5 - 2);
+  		astField[a].setPointDirection((int)(Math.random() * 360));
+  	}
 }
 public void draw() 
 {
@@ -15,6 +23,11 @@ public void draw()
   	for (int i = 0; i < nightSky.length; i++)
   	{
   		nightSky[i].show();
+  	}
+  	for (int a = 0; a < astField.length; a++)
+  	{
+  		astField[a].show();
+  		astField[a].move();
   	}
   	bob.move();
   	bob.show();
@@ -32,11 +45,11 @@ public void keyPressed()
 	}
 	if(key == 'w')
 	{
-		bob.accelerate(1);
+		bob.accelerate(0.5);
 	}
 	if(key == 's')
 	{
-		bob.accelerate(-1);
+		bob.accelerate(-0.5);
 	}
 	if(key == 'd')
 	{
