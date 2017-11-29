@@ -1,5 +1,5 @@
 Spaceship bob = new Spaceship();
-Asteroid[] astField = new Asteroid[250];
+ArrayList<Asteroid> astField = new ArrayList<Asteroid>();
 Star[] nightSky = new Star[200];
 public void setup() 
 {
@@ -9,12 +9,12 @@ public void setup()
   	{
   		nightSky[i] = new Star();
   	}
-  	for (int a = 0; a < astField.length; a++)
+  	for (int a = 0; a < 15; a++)
   	{
-  		astField[a] = new Asteroid();
-  		astField[a].setDirectionX(Math.random() * 5 - 2);
-  		astField[a].setDirectionY(Math.random() * 5 - 2);
-  		astField[a].setPointDirection((int)(Math.random() * 360));
+  		astField.add(new Asteroid());
+  		astField.get(a).setDirectionX(Math.random() * 5 - 2);
+  		astField.get(a).setDirectionY(Math.random() * 5 - 2);
+  		astField.get(a).setPointDirection((int)(Math.random() * 360));
   	}
 }
 public void draw() 
@@ -24,10 +24,14 @@ public void draw()
   	{
   		nightSky[i].show();
   	}
-  	for (int a = 0; a < astField.length; a++)
+  	for(int a = astField.size()-1; a >= 0; a--)
   	{
-  		astField[a].show();
-  		astField[a].move();
+  		astField.get(a).show();
+  		astField.get(a).move();
+  		if(dist((float)bob.getX(),(float)bob.getY(),(float)astField.get(a).getX(),(float)astField.get(a).getY()) < 20)
+  		{
+  			astField.remove(a);
+  		}
   	}
   	bob.move();
   	bob.show();
