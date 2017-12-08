@@ -1,4 +1,5 @@
 Spaceship bob = new Spaceship();
+ArrayList<Bullet> bill = new ArrayList<Bullet>();
 ArrayList<Asteroid> astField = new ArrayList<Asteroid>();
 Star[] nightSky = new Star[200];
 public void setup() 
@@ -33,6 +34,18 @@ public void draw()
   			astField.remove(a);
   		}
   	}
+  	for (int b = bill.size()-1; b >= 0; b--)
+  	{
+  		bill.get(b).show();
+  		bill.get(b).move();
+  		for(int a = astField.size()-1; a >= 0; a--)
+  		{
+  			if(dist((float)bill.get(b).getX(),(float)bill.get(b).getY(),(float)astField.get(a).getX(),(float)astField.get(a).getY()) < 20)
+  			{
+  				astField.remove(a);
+  			}
+  		}
+  	}
   	bob.move();
   	bob.show();
 }
@@ -62,6 +75,10 @@ public void keyPressed()
 	if(key == 'a')
 	{
 		bob.turn(-10);
+	}
+	if(key == 'r')
+	{
+		bill.add(new Bullet(bob));
 	}
 }
 public void keyReleased()
